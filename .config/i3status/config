@@ -1,0 +1,40 @@
+# CYBERDECK // i3status
+# the HUD strip up top. vitals, power, heat, and a pigeon
+# carrying your packets across the net (RFC 1149).
+
+general {
+  output_format = "i3bar"
+  colors = true
+  interval = 5
+  color_good = "#05d9e8"
+  color_degraded = "#ffb000"
+  color_bad = "#ff2a6d"
+}
+order += "ethernet eth1"
+order += "battery 0"
+order += "cpu_temperature 0"
+order += "cpu_usage"
+order += "memory"
+order += "tztime local"
+
+ethernet eth1 {
+  format_up = "IPoAC: PIGEON AIRBORNE"
+  format_down = "IPoAC: PIGEON DOWN"
+}
+battery 0 {
+  format = "PWR %status%percentage"
+  status_chr = "+"
+  status_bat = "-"
+  status_full = "="
+  low_threshold = 15
+  threshold_type = percentage
+  last_full_capacity = true
+}
+cpu_temperature 0 {
+  format = "TEMP %degrees°C"
+  max_threshold = 75
+}
+cpu_usage { format = "CPU %usage" }
+memory    { format = "MEM %used" }
+disk "/"  { format = "DSK %avail" }
+tztime local { format = "%Y.%m.%d // %H:%M " }

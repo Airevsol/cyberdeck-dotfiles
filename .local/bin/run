@@ -1,0 +1,18 @@
+#!/bin/sh
+# CYBERDECK // run
+# compile, execute, report. one command, zero ceremony.
+
+FILES=""
+while [ $# -gt 0 ] && [ "$1" != "--" ]; do FILES="$FILES $1"; shift; done
+[ "${1:-}" = "--" ] && shift
+if [ -z "$FILES" ] && [ -f Makefile ]; then exec make -s run; fi
+[ -n "$FILES" ] || FILES=$(ls *.c 2>/dev/null)
+[ -n "$FILES" ] || { echo "run: no .c files here"; exit 1; }
+printf '\033[35m== compiling:%s\033[0m\n' "$(echo $FILES)"
+if gcc -Wall -Wextra -std=c11 -g -o ./prog $FILES; then
+  printf '\033[36m== running ./prog\033[0m\n'
+  ./prog "$@"
+  printf '\n\033[35m== exit code %s\033[0m\n' "$?"
+else
+  printf '\033[31m== compile failed\033[0m\n'; exit 1
+fi

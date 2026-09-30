@@ -1,0 +1,36 @@
+#!/bin/sh
+# CYBERDECK // newc
+# spin up a fresh C project in the ~/code sprawl.
+
+N="${1:-}"; [ -n "$N" ] || { echo "usage: newc NAME"; exit 1; }
+D="$HOME/code/$N"
+[ -e "$D" ] && { echo "newc: $D already exists"; exit 1; }
+mkdir -p "$D" && cd "$D" || exit 1
+cat > main.c <<'C'
+#include <stdio.h>
+
+int main(void)
+{
+    printf("hello from the cyberdeck\n");
+    return 0;
+}
+C
+{
+  printf 'CC      = gcc\n'
+  printf 'CFLAGS  = -Wall -Wextra -std=c11 -g\n'
+  printf 'SRC     = $(wildcard *.c)\n'
+  printf 'BIN     = %s\n\n' "$N"
+  printf '.PHONY: all run debug memcheck lint tags clean\n\n'
+  printf 'all: $(BIN)\n\n'
+  printf '$(BIN): $(SRC) $(wildcard *.h)\n\t$(CC) $(CFLAGS) -o $@ $(SRC)\n\n'
+  printf 'run: all\n\t./$(BIN)\n\n'
+  printf 'debug: all\n\tcgdb ./$(BIN)\n\n'
+  printf 'memcheck: all\n\tvalgrind --leak-check=full ./$(BIN)\n\n'
+  printf 'lint:\n\tcppcheck --enable=warning,style --quiet .\n\n'
+  printf 'tags:\n\tctags -R .\n\n'
+  printf 'clean:\n\trm -f $(BIN) tags\n'
+} > Makefile
+printf '%s\n*.o\ntags\nprog\n' "$N" > .gitignore
+git init -q && git add . && git commit -qm "start $N" 2>/dev/null
+echo "created $D"
+echo "next:  cd ~/code/$N && dev"

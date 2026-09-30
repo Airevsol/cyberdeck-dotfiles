@@ -1,0 +1,29 @@
+#!/bin/sh
+# CYBERDECK // mkwall
+# paints the backdrop for any screen: violet void, cyan grid, CRT scanlines,
+# and a status line in the corner. run it, then reload i3 (Alt+Shift+r).
+
+IM=$(command -v magick || command -v convert) || { echo "mkwall: install imagemagick"; exit 1; }
+RES="${1:-$(xrandr 2>/dev/null | awk '/\*/{print $1; exit}')}"
+[ -n "$RES" ] || RES=1024x768
+W=${RES%x*}; H=${RES#*x}
+OUT="$HOME/.local/share/cyberdeck/wall.png"
+mkdir -p "$(dirname "$OUT")"
+FONT=$(fc-match -f '%{file}' 'DejaVu Sans Mono' 2>/dev/null)
+
+GRID=$(awk -v w="$W" -v h="$H" 'BEGIN{
+  print "stroke #05d9e82a stroke-width 1";
+  for(x=0;x<w;x+=40) printf "line %d.5,0 %d.5,%d\n",x,x,h;
+  for(y=0;y<h;y+=40) printf "line 0,%d.5 %d,%d.5\n",y,w,y }')
+SCAN=$(awk -v w="$W" -v h="$H" 'BEGIN{
+  print "stroke #00000080 stroke-width 1";
+  for(y=2;y<h;y+=3) printf "line 0,%d.5 %d,%d.5\n",y,w,y }')
+
+"$IM" -size "$RES" gradient:'#1c0638-#030006' \
+  -draw "$GRID" \
+  \( -size "$RES" radial-gradient:'#ff2a6d30-#00000000' \) -composite \
+  -draw "$SCAN" \
+  ${FONT:+-font "$FONT"} -pointsize 13 -gravity southeast \
+  -fill '#ff2a6d' -annotate +22+34 "$(hostname | tr a-z A-Z) :: NEURAL LINK ESTABLISHED" \
+  -fill '#05d9e8' -annotate +22+16 "SYS.ONLINE // 1995-$(date +%Y)" \
+  "$OUT" && echo "mkwall: $RES -> $OUT"

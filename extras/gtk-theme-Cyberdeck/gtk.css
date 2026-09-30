@@ -1,0 +1,61 @@
+/* CYBERDECK // login theme
+   black glass, pink wire, cyan read-outs. */
+
+@import url("resource:///org/gtk/libgtk/theme/Adwaita/gtk-contained-dark.css");
+
+* { font-family: "Terminus", "DejaVu Sans Mono", monospace; }
+
+#login_window, #content_frame, #buttonbox_frame {
+  background-color: rgba(10, 10, 18, 0.94);
+  background-image: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+#login_window {
+  border: 1px solid #ff2a6d;
+  padding: 18px;
+}
+#login_window label { color: #05d9e8; }
+
+entry {
+  background-color: #0a0a12;
+  background-image: none;
+  color: #d1f7ff;
+  caret-color: #ff2a6d;
+  border: 1px solid #05d9e8;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 6px;
+}
+entry:focus { border-color: #ff2a6d; }
+
+button {
+  background-color: #0a0a12;
+  background-image: none;
+  color: #05d9e8;
+  border: 1px solid #05d9e8;
+  border-radius: 0;
+  box-shadow: none;
+  text-shadow: none;
+}
+button:hover { background-color: #05d9e8; color: #0a0a12; }
+#login_button, button.suggested-action {
+  background-color: #ff2a6d;
+  color: #0a0a12;
+  border-color: #ff2a6d;
+  font-weight: bold;
+}
+
+#panel_window {
+  background-color: #0a0a12;
+  background-image: none;
+  border-bottom: 2px solid #ff2a6d;
+}
+#panel_window, #panel_window label, #panel_window menuitem { color: #05d9e8; }
+menu, .menu, popover {
+  background-color: #0a0a12;
+  color: #05d9e8;
+  border: 1px solid #ff2a6d;
+  border-radius: 0;
+}
+menuitem:hover { background-color: #ff2a6d; color: #0a0a12; }

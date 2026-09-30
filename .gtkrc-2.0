@@ -1,0 +1,5 @@
+# CYBERDECK // gtk2
+# legacy apps get the dark treatment too.
+
+gtk-theme-name="Adwaita-dark"
+gtk-font-name="Terminus 10"

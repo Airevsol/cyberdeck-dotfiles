@@ -1,0 +1,35 @@
+// CYBERDECK // fastfetch
+// system readout for the operator. skull on the left, specs on the right,
+// HolyC in spirit.
+
+{
+  "logo": {
+    "type": "file-raw", "width": 28, "height": 18,
+    "source": "~/.config/fastfetch/skull.txt",
+    "color": { "1": "yellow", "2": "red", "3": "cyan", "4": "white" },
+    "padding": { "top": 1, "left": 3, "right": 4 }
+  },
+  "display": {
+    "separator": " :: ",
+    "color": { "keys": "red", "title": "cyan" }
+  },
+  "modules": [
+    "title",
+    "separator",
+    { "type": "os",       "key": "OS  " },
+    { "type": "host",     "key": "HW  " },
+    { "type": "kernel",   "key": "KRN " },
+    { "type": "uptime",   "key": "UP  " },
+    { "type": "packages", "key": "PKG " },
+    { "type": "wm",       "key": "WM  " },
+    { "type": "terminal", "key": "TTY " },
+    { "type": "cpu",      "key": "CPU " },
+    { "type": "memory",   "key": "MEM " },
+    { "type": "disk",     "key": "DSK " },
+    { "type": "battery",  "key": "PWR " },
+    "break",
+    { "type": "custom", "format": "HolyC // 640x480 // 16 colors" },
+    "break",
+    "colors"
+  ]
+}

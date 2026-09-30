@@ -1,0 +1,37 @@
+! CYBERDECK // .Xresources
+! neon-noir palette for the terminal: hot pink, ice cyan, void black.
+! phosphor glow on a dead CRT. the year is always 1995.
+
+*.background: #0a0a12
+*.foreground: #d1f7ff
+*.cursorColor: #ff2a6d
+*.color0:  #1a1a2e
+*.color8:  #3b3b58
+*.color1:  #ff2a6d
+*.color9:  #ff6b9a
+*.color2:  #39ff14
+*.color10: #7dff5c
+*.color3:  #ffb000
+*.color11: #ffd166
+*.color4:  #005678
+*.color12: #01a0c7
+*.color5:  #bd00ff
+*.color13: #d67bff
+*.color6:  #05d9e8
+*.color14: #7af9ff
+*.color7:  #b8c4d6
+*.color15: #d1f7ff
+
+URxvt.font:          xft:Terminus:pixelsize=16,xft:VGA Art:pixelsize=16
+URxvt.boldFont:      xft:Terminus:bold:pixelsize=16,xft:VGA Art:pixelsize=16
+URxvt.letterSpace:   0
+URxvt.scrollBar:     false
+URxvt.internalBorder: 10
+URxvt.cursorBlink:   true
+URxvt.saveLines:     5000
+URxvt.urgentOnBell:  true
+URxvt.loginShell:    true
+
+XTerm*faceName: Terminus
+XTerm*faceSize: 10
+XTerm*internalBorder: 10

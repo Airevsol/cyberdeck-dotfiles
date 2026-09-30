@@ -1,0 +1,11 @@
+#!/bin/sh
+# CYBERDECK // dev
+# drops you onto workspace 3:DEV. editor left, live build feed right.
+
+D=$(cd "${1:-.}" && pwd) || exit 1
+F=main.c; [ -f "$D/$F" ] || F=$(cd "$D" && ls *.c 2>/dev/null | head -1)
+i3-msg -q "workspace number 3:DEV"
+i3-msg -q "layout splith"
+i3-msg -q "exec urxvt -cd '$D' -e vim $F"
+sleep 0.6
+i3-msg -q "exec urxvt -cd '$D' -e sh -c 'while true; do ls *.c *.h 2>/dev/null | entr -cd run; sleep 1; done'"
